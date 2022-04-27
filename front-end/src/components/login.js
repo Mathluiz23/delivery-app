@@ -8,14 +8,35 @@ function Login () {
       <form>
         <label htmlFor="email">
           Login:
-          <input id="email" type="text" placeholder="example: email@test.com"/>
+          <input
+            data-testid="common_login__input-email"
+            id="email"
+            type="text"
+            placeholder="example: email@test.com"
+          />
         </label>
         <label htmlFor="password">
           Senha:
-          <input id="password" type="password" placeholder="digite sua senha..." />
+          <input
+            data-testid="common_login__input-password"
+            id="password"
+            type="password"
+            placeholder="digite sua senha..."
+          />
         </label>
-        <button type="submit">Login</button>
-        <button type="submit">Ainda não tenho conta</button>
+        <button
+          data-testid="common_login__button-login"
+          type="submit"
+        >
+          Login
+        </button>
+        <span data-testid="common_login__element-invalid-email"></span>
+        <button
+          data-testid="common_login__button-register"
+          type="submit"
+        >
+          Ainda não tenho conta
+        </button>
       </form>
     </>
   );
