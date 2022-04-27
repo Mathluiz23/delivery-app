@@ -12,7 +12,7 @@ function Login () {
         </label>
         <label htmlFor="password">
           Senha:
-          <input id="password" type="password" />
+          <input id="password" type="password" placeholder="digite sua senha..." />
         </label>
         <button type="submit">Login</button>
         <button type="submit">Ainda não tenho conta</button>
