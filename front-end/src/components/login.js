@@ -10,7 +10,7 @@ function Login() {
 
     const bodyRequest = { email, password };
 
-    await axios.post('http://localhost:3000/login', bodyRequest);
+    const response = await axios.post('http://localhost:3001/login', bodyRequest);
   };
 
   const handleLogin = (userEmail, userPassword) => {
