@@ -1,8 +1,17 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    
+    const bodyRequest = { email, password };
+
+    await axios.post('http://localhost:3000/login', bodyRequest);
+  }
 
   const handleLogin = (userEmail, userPassword) => {
     const minPasswordLength = 6;
@@ -20,7 +29,7 @@ function Login() {
     <>
       <img alt="beer" src="https://w7.pngwing.com/pngs/644/125/png-transparent-beer-festival-computer-icons-food-beer-food-text-beer-festival.png" width={ 40 } height={ 40 } />
       <h3>Trybeer</h3>
-      <form>
+      <form onSubmit={ handleFormSubmit }>
         <label htmlFor="email">
           Login:
           <input
