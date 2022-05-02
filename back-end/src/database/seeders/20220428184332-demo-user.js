@@ -3,25 +3,22 @@
 module.exports = {
   async up (queryInterface, Sequelize) {
     return queryInterface.bulkInsert('users', [{
-      id: 1,
-      name: 'John Doe',
-      password: 'umasenhamuitosegura',
-      email: 'john@example.com',
-      role: 'customer'
+      name: 'Delivery App Admin',
+      password: 'a4c86edecc5aee06eff8fdeda69e0d04',
+      email: 'adm@deliveryapp.com',
+      role: 'administrator'
     },
     {
-      id: 2,
-      name: 'Ada Lovelace',
-      password: 'primeiramulherprogramadora',
-      email: 'ada@example.com',
+      name: 'Fulana Pereira',
+      password: '3c28d2b0881bf46457a853e0b07531c6',
+      email: 'fulana@deliveryapp.com',
       role: 'seller'
     },
     {
-      id: 3,
-      name: 'Madre Teresa',
-      password: 'decalcutá',
-      email: 'teresa@example.com',
-      role: 'administrator'
+      name: 'Cliente Zé Birita',
+      password: '1c37466c159755ce1fa181bd247cb925',
+      email: 'zebirita@email.com',
+      role: 'customer'
     }
   ]);
   },
