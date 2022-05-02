@@ -7,11 +7,11 @@ function Login() {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    
+
     const bodyRequest = { email, password };
 
     await axios.post('http://localhost:3000/login', bodyRequest);
-  }
+  };
 
   const handleLogin = (userEmail, userPassword) => {
     const minPasswordLength = 6;
