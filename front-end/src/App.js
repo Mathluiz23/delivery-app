@@ -4,12 +4,10 @@ import LoginPage from './pages/loginPage';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/login" element={ <LoginPage /> } />
-        <Route exact path="/" element={ <Navigate to="/login" /> } />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/login" element={ <LoginPage /> } />
+      <Route exact path="/" element={ <Navigate to="/login" /> } />     
+    </Routes>
   );
 }
 
