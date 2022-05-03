@@ -4,21 +4,13 @@ import reportWebVitals from './reportWebVitals';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import LoginPage from './pages/loginPage';
 
 const rootElement = document.getElementById("root");
 render(
-  <BrowserRouter>
-    <Routes>
-      <Route exact path="/login" element={ 
-          <main style={{ padding: "1rem 0" }}>
-            <h2>Expenses</h2>
-          </main>
-       } />
-      <Route exact path="/" element={ <Navigate to="/login" /> } />     
-    </Routes>
-  </BrowserRouter>
-  ,rootElement
-)
+  <App />,
+  rootElement
+);
 
 
 // If you want to start measuring performance in your app, pass a function
