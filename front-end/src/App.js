@@ -1,16 +1,12 @@
 import React from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginPage from './pages/loginPage';
 
-function App() {
+export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/' element={<LoginPage />} />
-      </Routes>
-    </BrowserRouter>
+    <Routes>
+      <Route exact path="/login" element={ <LoginPage /> } />
+      <Route exact path="/" element={ <Navigate to="/login" /> } />
+    </Routes>
   );
 }
-
-export default App;

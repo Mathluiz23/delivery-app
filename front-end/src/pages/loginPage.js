@@ -1,7 +1,7 @@
-import React from "react";
-import Login from "../components/login";
+import React from 'react';
+import Login from '../components/login';
 
-function LoginPage () {
+function LoginPage() {
   return (
     <div>
       <Login />
