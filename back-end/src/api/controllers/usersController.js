@@ -13,7 +13,7 @@ const usersController = {
       return res.status(StatusCode.NotFound).json(response);
     }
   
-    return res.status(StatusCode.OK).json();
+    return res.status(StatusCode.OK).json(response);
   },
 };
 
