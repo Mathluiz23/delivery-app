@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import loginErrors from '../../errors/loginErrors';
 import LoginError from './loginError';
 
@@ -7,6 +8,23 @@ function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loginSucess, setLoginSucess] = useState(0);
+  const navigate = useNavigate();
+
+  const redirectByRole = (role) => {
+    switch (role) {
+    case 'customer':
+      navigate(`/${role}/products`);
+      break;
+    case 'seller':
+      navigate(`/${role}/orders`);
+      break;
+    case 'administrator':
+      navigate(`/${role}/manage`);
+      break;
+    default:
+      break;
+    }
+  };
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
@@ -14,7 +32,8 @@ function Login() {
     const bodyRequest = { email, password };
 
     try {
-      await axios.post('http://localhost:3001/login', bodyRequest);
+      const response = await axios.post('http://localhost:3001/login', bodyRequest);
+      redirectByRole(response.data.role);
     } catch (error) {
       setLoginSucess(loginErrors.ERR_NOT_FOUND);
     }
@@ -25,7 +44,7 @@ function Login() {
     // Regex retirado do site
     // https://pt.stackoverflow.com/questions/1386/expressão-regular-para-validação-de-e-mail
 
-    const regex = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
+    const regex = /^[a-z0-9._-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
     if (regex.test(userEmail) && userPassword.length >= minPasswordLength) return false;
 
