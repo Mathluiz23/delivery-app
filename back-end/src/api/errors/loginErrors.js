@@ -1,5 +1,5 @@
 const errors = {
-  invalidEmail: 'E-mail inválido!',
+  invalidCredentials: 'E-mail ou senha inválidos!',
 };
 
 module.exports = errors;

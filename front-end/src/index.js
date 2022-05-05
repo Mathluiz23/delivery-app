@@ -1,15 +1,17 @@
-import { render } from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import reportWebVitals from './reportWebVitals';
 import App from './App';
+import { BrowserRouter } from 'react-router-dom';
 
-const rootElement = document.getElementById("root");
-render(
+ReactDOM.render(
   <BrowserRouter>
-    <App />
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
   </BrowserRouter>,
-  rootElement
+  document.getElementById('root'),
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

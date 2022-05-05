@@ -2,11 +2,11 @@ const UsersModel = require('../models/usersModel');
 const LoginErrors = require('../errors/loginErrors');
 
 const usersService = {
-  findByEmail: async (email) => {
-    const user = await UsersModel.findByEmail(email);
+  getUser: async (email, password) => {
+    const user = await UsersModel.getUser(email, password);
 
     if (!user) {
-      return { message: LoginErrors.invalidEmail };
+      return { message: LoginErrors.invalidCredentials };
     }
   
     return user;

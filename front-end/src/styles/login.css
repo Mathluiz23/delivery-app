@@ -1,0 +1,72 @@
+/* zerando css */
+* {
+  border: none;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* container login */
+body {
+  background-image: url('https://scontent.fgyn22-1.fna.fbcdn.net/v/t1.6435-9/101648873_107856470950354_7404920151159603200_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=NcPt-BIyQJwAX9_IiGY&tn=rxgOen4esnmld11H&_nc_ht=scontent.fgyn22-1.fna&oh=00_AT-iaBF_WCLgodDQYSp8CMCA4qqPNdLHAhtP0VrTl90cmg&oe=629ACE42');
+  background-position-y: 30%;
+  background-size: cover;
+}
+
+.login-container {
+  background-color: #f9f4ef;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px black;
+  font-size: 1.3rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15vh;
+  padding: 20px 30px;
+  text-align: center;
+  width: 500px;
+}
+
+/* container form */
+form {
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+label, input {
+  display: block;
+  text-align: left;
+  width: 100%;
+}
+
+input {
+  border-bottom: 2px solid #323232;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.button-login-and-register {
+  background-color: #ffd803;
+  border-radius: 10px;
+  color: #1f1235;
+  display: block;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  padding: 10px;
+  width: 60%;
+}
+
+.button-login-and-register:hover {
+  background-color: rgb(248, 162, 5);
+}
+
+span {
+  color: red;
+  display: block;
+  font-weight: 600;
+  margin-top: 20px;
+}
