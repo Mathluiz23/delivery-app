@@ -88,6 +88,7 @@ function Login() {
           Login
         </button>
         <button
+          className="button-login-and-register"
           data-testid="common_login__button-register"
           type="submit"
           id="button"
