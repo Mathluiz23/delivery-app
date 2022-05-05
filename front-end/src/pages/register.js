@@ -1,5 +1,5 @@
 import React from 'react';
-import Register from '../components/resgister';
+import Register from '../components/register/resgister';
 
 function RegisterPage() {
   <div>
