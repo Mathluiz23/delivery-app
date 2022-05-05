@@ -1,0 +1,74 @@
+/* zerando css */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Helvetica;
+  border: none;
+}
+
+/* container login */
+
+body {
+  background-image: url('https://scontent.fgyn22-1.fna.fbcdn.net/v/t1.6435-9/101648873_107856470950354_7404920151159603200_n.jpg?_nc_cat=110&ccb=1-5&_nc_sid=09cbfe&_nc_ohc=NcPt-BIyQJwAX9_IiGY&tn=rxgOen4esnmld11H&_nc_ht=scontent.fgyn22-1.fna&oh=00_AT-iaBF_WCLgodDQYSp8CMCA4qqPNdLHAhtP0VrTl90cmg&oe=629ACE42');
+  background-size: cover;
+  background-position-y: 30%;
+}
+
+#login-container {
+  width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px 30px;
+  margin-top: 15vh;
+  border-radius: 10px;
+  text-align: center;
+  background-color: #f9f4ef;
+  font-size: 1.3rem;
+}
+
+/* container form */
+
+form {
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+label, input {
+  display: block;
+  width: 100%;
+  text-align: left;
+}
+
+input {
+  border-bottom: 2px solid #323232;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+#button {
+  display: block;
+  padding: 10px;
+  background-color: #ffd803;
+  color: #1f1235;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  border-radius: 10px;
+  width: 60%;
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+#button:hover {
+  background-color: #F8A205;
+}
+
+span {
+  display: block;
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+}
