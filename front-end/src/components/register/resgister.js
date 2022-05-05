@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import RegisterError from './registerError';
+import registerErrors from '../../errors/registerErrors';
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
+  const navigate = useNavigate();
+  const [registerSucess, setRegisterSucess] = useState(0);
 
   const handleRegister = (userName, userEmail, userPassword) => {
     const minPasswordLength = 6;
@@ -19,6 +23,19 @@ function Register() {
       return false;
     }
     return true;
+  };
+
+  const handleRegisterSubmit = async (e) => {
+    e.preventDefault();
+
+    const bodyRequest = { email, password, name };
+
+    try {
+      await axios.post('http://localhost:3001/register', bodyRequest);
+      navigate('/customer/products');
+    } catch (error) {
+      setRegisterSucess(registerErrors.ERR_CONFLICT);
+    }
   };
 
   return (
@@ -60,12 +77,14 @@ function Register() {
       <button
         data-testid="common_register__button-register"
         type="submit"
+        onClick={ handleRegisterSubmit }
         id="button-register"
         disabled={ handleRegister(name, email, password) }
       >
         Cadastrar
       </button>
-      <RegisterError />
+      { registerSucess === registerErrors.ERR_CONFLICT
+        && <RegisterError /> }
     </form>
   );
 }
