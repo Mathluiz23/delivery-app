@@ -14,7 +14,7 @@ function Register() {
 
     const regex = /^[a-z0-9._-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
-    if (regex.test(userEmail) && userPassword.length >= minPasswordLength && userName >= minNameLength) {
+    if (regex.test(userEmail) && userPassword.length >= minPasswordLength && userName.length >= minNameLength) {
       return false;
     }
     return true;
