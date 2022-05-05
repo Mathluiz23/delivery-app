@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import loginErrors from '../../errors/loginErrors';
 import LoginError from './loginError';
+import '../../styles/login.css';
 
 function Login() {
   const [email, setEmail] = useState('');
@@ -52,9 +53,8 @@ function Login() {
   };
 
   return (
-    <>
-      <img alt="beer" src="https://w7.pngwing.com/pngs/644/125/png-transparent-beer-festival-computer-icons-food-beer-food-text-beer-festival.png" width={ 40 } height={ 40 } />
-      <h3>Trybeer</h3>
+    <div id="login-container">
+      <h3>🍻 Trybeer 🍻</h3>
       <form onSubmit={ handleFormSubmit }>
         <label htmlFor="email">
           Login:
@@ -63,7 +63,7 @@ function Login() {
             id="email"
             type="text"
             value={ email }
-            placeholder="example: email@test.com"
+            placeholder="example: adalovelace@gmail.com"
             onChange={ (e) => setEmail(e.target.value) }
           />
         </label>
@@ -82,19 +82,21 @@ function Login() {
           data-testid="common_login__button-login"
           type="submit"
           disabled={ handleLogin(email, password) }
+          id="button"
         >
           Login
         </button>
         <button
           data-testid="common_login__button-register"
           type="submit"
+          id="button"
         >
           Ainda não tenho conta
         </button>
         { loginSucess === loginErrors.ERR_NOT_FOUND
           && <LoginError /> }
       </form>
-    </>
+    </div>
   );
 }
 
