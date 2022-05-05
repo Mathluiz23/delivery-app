@@ -14,7 +14,8 @@ function Register() {
 
     const regex = /^[a-z0-9._-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
 
-    if (regex.test(userEmail) && userPassword.length >= minPasswordLength && userName >= minNameLength) {
+    if (regex.test(userEmail) && userPassword.length >= minPasswordLength
+    && userName.length >= minNameLength) {
       return false;
     }
     return true;
@@ -25,7 +26,7 @@ function Register() {
       <h3>Cadastro</h3>
       <label htmlFor="input-name">
         Nome:
-        <input 
+        <input
           data-testid="common_register__input-name"
           id="input-name"
           type="text"
@@ -36,7 +37,7 @@ function Register() {
       </label>
       <label htmlFor="input-email">
         Email:
-        <input 
+        <input
           data-testid="common_register__input-email"
           id="input-email"
           type="text"
@@ -47,7 +48,7 @@ function Register() {
       </label>
       <label htmlFor="input-password">
         Senha:
-        <input 
+        <input
           data-testid="common_register__input-password"
           id="input-password"
           type="password"
@@ -60,7 +61,7 @@ function Register() {
         data-testid="common_register__button-register"
         type="submit"
         id="button-register"
-        disabled= { handleRegister(name, email, password) }
+        disabled={ handleRegister(name, email, password) }
       >
         Cadastrar
       </button>
