@@ -92,6 +92,7 @@ function Login() {
           data-testid="common_login__button-register"
           type="submit"
           id="button"
+          onClick={ ()=> navigate('/register') }
         >
           Ainda não tenho conta
         </button>
