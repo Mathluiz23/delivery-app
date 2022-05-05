@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RegisterError from './registerError';
 
 function Register() {
@@ -7,7 +7,7 @@ function Register() {
     <label>
       Nome:
       <input 
-        datatest-id="common_register__input-name"
+        data-testid="common_register__input-name"
         id="input-name"
         type="text"
         placeholder="Seu nome"
@@ -16,7 +16,7 @@ function Register() {
     <label>
       Email:
       <input 
-        datatest-id="common_register__input-email"
+        data-testid="common_register__input-email"
         id="input-email"
         type="text"
         placeholder="sume-nome@site.com.br"
@@ -25,15 +25,15 @@ function Register() {
     <label>
       Senha:
       <input 
-        datatest-id="common_register__input-password"
+        data-testid="common_register__input-password"
         id="input-password"
         type="password"
         placeholder="digite um senha..."
       />
     </label>
     <button
-      datatest-id="common_register__button-register"
-      type="button"
+      data-testid="common_register__button-register"
+      type="submit"
       id="button-register"
     >
       Cadastrar
