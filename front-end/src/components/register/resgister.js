@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import RegisterError from './registerError';
 
 function Register() {
+  return(
   <form>
     <h3>Cadastro</h3>
     <label>
@@ -19,7 +20,7 @@ function Register() {
         data-testid="common_register__input-email"
         id="input-email"
         type="text"
-        placeholder="sume-nome@site.com.br"
+        placeholder="seu-nome@site.com.br"
       />
     </label>
     <label>
@@ -40,6 +41,7 @@ function Register() {
     </button>
     <RegisterError />
   </form>
+  );
 }
 
 export default Register;
