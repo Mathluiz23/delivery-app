@@ -34,10 +34,16 @@ function Login() {
 
     try {
       const response = await axios.post('http://localhost:3001/login', bodyRequest);
-      localStorage.setItem('name', response.data.name);
-      localStorage.setItem('email', response.data.email);
-      localStorage.setItem('role', response.data.role);
-      localStorage.setItem('token', response.data.token);
+
+      const objLocalStorage = {
+        name: response.data.name,
+        email: response.data.email,
+        role: response.data.role,
+        token: response.data.token,
+      };
+
+      localStorage.setItem('user', JSON.stringify(objLocalStorage));
+
       redirectByRole(response.data.role);
     } catch (error) {
       setLoginSucess(loginErrors.ERR_NOT_FOUND);
