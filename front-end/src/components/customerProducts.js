@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CustomerProducts() {
+function CustomerProducts () {
   <div>
     <nav>
       <ul>
