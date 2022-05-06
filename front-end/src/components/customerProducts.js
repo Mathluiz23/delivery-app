@@ -1,8 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
+  const [userName, setUsername] = useState('');
+  const navigate = useNavigate();
+
+  const getUserFromLocalStorage = () => {
+    const objLocalStorage = localStorage.getItem('user');
+
+    setUsername(JSON.parse(objLocalStorage).name);
+  };
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -15,6 +29,7 @@ function CustomerProducts() {
     };
 
     fetchData();
+    getUserFromLocalStorage();
   }, []);
 
   return (
@@ -34,14 +49,16 @@ function CustomerProducts() {
           <li
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            Nome
-          </li>
-          <li
-            data-testid="customer_products__element-navbar-link-logout"
-          >
-            Sair
+            {userName}
           </li>
         </ul>
+        <button
+          type="button"
+          data-testid="customer_products__element-navbar-link-logout"
+          onClick={ logout }
+        >
+          Sair
+        </button>
       </nav>
       { products.map((product) => (
         <div
