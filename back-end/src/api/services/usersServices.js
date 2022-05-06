@@ -1,16 +1,18 @@
 const UsersModel = require('../models/usersModel');
 const LoginErrors = require('../errors/loginErrors');
 const RegisterErrors = require('../errors/registerErrors');
+const auth = require('../helpers/auth');
 
 const usersService = {
   getUser: async (email, password) => {
     const user = await UsersModel.getUser(email, password);
+    const token = auth(email);
 
     if (!user) {
       return { message: LoginErrors.invalidCredentials };
     }
   
-    return user;
+    return { user, token };
   },
 
   create: async (name, email, password) => {
