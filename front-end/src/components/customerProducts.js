@@ -67,7 +67,7 @@ function CustomerProducts() {
           <h3
             data-testid={ `customer_products__element-card-price-${product.id}` }
           >
-            { product.price }
+            { product.price.replace(/\./, ',') }
           </h3>
           <img
             alt="imagem do produto"
@@ -88,6 +88,7 @@ function CustomerProducts() {
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
+            value={ 0 }
           />
           <button
             type="button"
