@@ -12,7 +12,7 @@ const usersService = {
       return { message: LoginErrors.invalidCredentials };
     }
   
-    return { user, token };
+    return { ...user.dataValues, token };
   },
 
   create: async (name, email, password) => {
