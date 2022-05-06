@@ -3,6 +3,7 @@ const StatusCode = {
   Created: 201,
   NotFound: 404,
   Conflict: 409,
+  InternalServerError: 500,
 };
 
 module.exports = StatusCode;
