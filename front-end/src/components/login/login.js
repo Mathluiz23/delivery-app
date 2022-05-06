@@ -90,8 +90,9 @@ function Login() {
         <button
           className="button-login-and-register"
           data-testid="common_login__button-register"
-          type="submit"
+          type="button"
           id="button"
+          onClick={ () => navigate('/register') }
         >
           Ainda não tenho conta
         </button>
