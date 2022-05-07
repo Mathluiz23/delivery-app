@@ -6,7 +6,9 @@ function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [userName, setUsername] = useState('');
   const [productsQuantity, setProductsQuantity] = useState({});
+  const [cartProducts, setCartProducts] = useState({});
   const navigate = useNavigate();
+  const CART_WITH_NO_ITEMS = '0,00';
 
   const getUserFromLocalStorage = () => {
     const objLocalStorage = localStorage.getItem('user');
@@ -40,25 +42,63 @@ function CustomerProducts() {
   const handlePrice = (e) => {
     const { name } = e.target;
 
+    const product = products.find((p) => p.name === name);
+
+    const inputValue = document.getElementsByName(product.name)[1].value;
+
     switch (e.target.id) {
     case 'input-price':
       setProductsQuantity({ ...productsQuantity, [name]: Number(e.target.value) });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: Number(e.target.value) * Number(product.price),
+        },
+      );
       break;
 
     case 'button-price-plus':
       setProductsQuantity({
-        ...productsQuantity, [name]: (productsQuantity[name] ? productsQuantity[name] += 1 : 1),
+        ...productsQuantity,
+        [name]: (productsQuantity[name] ? productsQuantity[name] += 1 : 1),
       });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: (Number(inputValue) * Number(product.price)) + Number(product.price),
+        },
+      );
       break;
 
     case 'button-price-less':
       setProductsQuantity({
-        ...productsQuantity, [name]: (productsQuantity[name] ? productsQuantity[name] -= 1 : 0),
+        ...productsQuantity,
+        [name]: (productsQuantity[name] ? productsQuantity[name] -= 1 : 0),
       });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: (Number(inputValue) * Number(product.price)) - Number(product.price),
+        },
+      );
       break;
     default:
       break;
     }
+  };
+
+  const getTotalPrice = () => {
+    // Pega o valor total de cada item com sua respectiva quantidade
+    const cart = Object.entries(cartProducts);
+
+    let totalPrice = 0;
+
+    // Soma todos no reduce e retorna para totalPrice
+    totalPrice = cart.reduce((acc, currentProduct) => acc + currentProduct[1], 0);
+
+    totalPrice = totalPrice.toFixed(2);
+
+    return String(totalPrice).replace(/\./, ',');
   };
 
   return (
@@ -141,12 +181,13 @@ function CustomerProducts() {
         type="button"
         onClick={ moveToCheckout }
         data-testid="customer_products__button-cart"
+        disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
       >
         Ver carrinho: R$
         <strong
           data-testid="customer_products__checkout-bottom-value"
         >
-          {/* {o preço total vai vir aqui} */}
+          { getTotalPrice() }
         </strong>
       </button>
     </div>
