@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [userName, setUsername] = useState('');
-  const [productsPrice, setProductsPrice] = useState({});
+  const [productsQuantity, setProductsQuantity] = useState({});
   const navigate = useNavigate();
 
   const getUserFromLocalStorage = () => {
@@ -42,18 +42,18 @@ function CustomerProducts() {
 
     switch (e.target.id) {
     case 'input-price':
-      setProductsPrice({ ...productsPrice, [name]: Number(e.target.value) });
+      setProductsQuantity({ ...productsQuantity, [name]: Number(e.target.value) });
       break;
 
     case 'button-price-plus':
-      setProductsPrice({
-        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] += 1 : 1),
+      setProductsQuantity({
+        ...productsQuantity, [name]: (productsQuantity[name] ? productsQuantity[name] += 1 : 1),
       });
       break;
 
     case 'button-price-less':
-      setProductsPrice({
-        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] -= 1 : 0),
+      setProductsQuantity({
+        ...productsQuantity, [name]: (productsQuantity[name] ? productsQuantity[name] -= 1 : 0),
       });
       break;
     default:
@@ -120,7 +120,7 @@ function CustomerProducts() {
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            value={ productsPrice[product.name] }
+            value={ productsQuantity[product.name] }
             defaultValue={ 0 }
             name={ product.name }
             onChange={ handlePrice }
