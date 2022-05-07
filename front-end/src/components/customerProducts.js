@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [userName, setUsername] = useState('');
+  const [productsPrice, setProductsPrice] = useState({});
   const navigate = useNavigate();
 
   const getUserFromLocalStorage = () => {
@@ -16,6 +17,10 @@ function CustomerProducts() {
   const logout = () => {
     localStorage.clear();
     navigate('/login');
+  };
+
+  const moveToCheckout = () => {
+    navigate('/customer/checkout');
   };
 
   useEffect(() => {
@@ -31,6 +36,30 @@ function CustomerProducts() {
     fetchData();
     getUserFromLocalStorage();
   }, []);
+
+  const handlePrice = (e) => {
+    const { name } = e.target;
+
+    switch (e.target.id) {
+    case 'input-price':
+      setProductsPrice({ ...productsPrice, [name]: Number(e.target.value) });
+      break;
+
+    case 'button-price-plus':
+      setProductsPrice({
+        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] += 1 : 1),
+      });
+      break;
+
+    case 'button-price-less':
+      setProductsPrice({
+        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] -= 1 : 0),
+      });
+      break;
+    default:
+      break;
+    }
+  };
 
   return (
     <div>
@@ -82,22 +111,44 @@ function CustomerProducts() {
           <button
             type="button"
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+            name={ product.name }
+            onClick={ handlePrice }
+            id="button-price-less"
           >
             -
           </button>
           <input
             type="number"
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            value={ 0 }
+            value={ productsPrice[product.name] }
+            defaultValue={ 0 }
+            name={ product.name }
+            onChange={ handlePrice }
+            id="input-price"
           />
           <button
             type="button"
             data-testid={ `customer_products__button-card-add-item-${product.id}` }
+            name={ product.name }
+            onClick={ handlePrice }
+            id="button-price-plus"
           >
             +
           </button>
         </div>
       )) }
+      <button
+        type="button"
+        onClick={ moveToCheckout }
+        data-testid="customer_products__button-cart"
+      >
+        Ver carrinho: R$
+        <strong
+          data-testid="customer_products__checkout-bottom-value"
+        >
+          {/* {o preço total vai vir aqui} */}
+        </strong>
+      </button>
     </div>
   );
 }
