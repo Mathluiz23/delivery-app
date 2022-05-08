@@ -69,6 +69,12 @@
   width: 280px;
 }
 
+.card-produtcs:hover {
+  box-shadow: 5px 6px 5px rgb(255, 255, 44);
+  transform: scale(1.05);
+  transition: 1.3s;
+}
+
 .card-produtcs img {
   border-radius: 8px;
   height: 180px;
