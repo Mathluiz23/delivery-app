@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import RegisterError from './registerError';
 import registerErrors from '../../errors/registerErrors';
+import '../../styles/register.css';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -40,53 +41,55 @@ function Register() {
   };
 
   return (
-    <form>
-      <h3>Cadastro</h3>
-      <label htmlFor="input-name">
-        Nome:
-        <input
-          data-testid="common_register__input-name"
-          id="input-name"
-          type="text"
-          placeholder="Seu nome"
-          value={ name }
-          onChange={ (e) => setName(e.target.value) }
-        />
-      </label>
-      <label htmlFor="input-email">
-        Email:
-        <input
-          data-testid="common_register__input-email"
-          id="input-email"
-          type="text"
-          placeholder="seu-nome@site.com.br"
-          value={ email }
-          onChange={ (e) => setEmail(e.target.value) }
-        />
-      </label>
-      <label htmlFor="input-password">
-        Senha:
-        <input
-          data-testid="common_register__input-password"
-          id="input-password"
-          type="password"
-          placeholder="digite uma senha..."
-          value={ password }
-          onChange={ (e) => setPassword(e.target.value) }
-        />
-      </label>
-      <button
-        data-testid="common_register__button-register"
-        type="submit"
-        onClick={ handleRegisterSubmit }
-        id="button-register"
-        disabled={ handleRegister(name, email, password) }
-      >
-        Cadastrar
-      </button>
-      { registerSucess === registerErrors.ERR_CONFLICT
-        && <RegisterError /> }
-    </form>
+    <div className="forms-register">
+      <form>
+        <h3>Cadastro</h3>
+        <label htmlFor="input-name">
+          Nome:
+          <input
+            data-testid="common_register__input-name"
+            id="input-name"
+            type="text"
+            placeholder="Seu nome"
+            value={ name }
+            onChange={ (e) => setName(e.target.value) }
+          />
+        </label>
+        <label htmlFor="input-email">
+          Email:
+          <input
+            data-testid="common_register__input-email"
+            id="input-email"
+            type="text"
+            placeholder="seu-nome@site.com.br"
+            value={ email }
+            onChange={ (e) => setEmail(e.target.value) }
+          />
+        </label>
+        <label htmlFor="input-password">
+          Senha:
+          <input
+            data-testid="common_register__input-password"
+            id="input-password"
+            type="password"
+            placeholder="digite uma senha..."
+            value={ password }
+            onChange={ (e) => setPassword(e.target.value) }
+          />
+        </label>
+        <button
+          data-testid="common_register__button-register"
+          type="submit"
+          onClick={ handleRegisterSubmit }
+          id="button-register"
+          disabled={ handleRegister(name, email, password) }
+        >
+          Cadastrar
+        </button>
+        { registerSucess === registerErrors.ERR_CONFLICT
+          && <RegisterError /> }
+      </form>
+    </div>
   );
 }
 
