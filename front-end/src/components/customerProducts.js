@@ -6,8 +6,10 @@ import '../styles/products.css';
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
   const [userName, setUsername] = useState('');
-  const [productsPrice, setProductsPrice] = useState({});
+  const [productsQuantity, setProductsQuantity] = useState({});
+  const [cartProducts, setCartProducts] = useState({});
   const navigate = useNavigate();
+  const CART_WITH_NO_ITEMS = '0,00';
 
   const getUserFromLocalStorage = () => {
     const objLocalStorage = localStorage.getItem('user');
@@ -41,31 +43,68 @@ function CustomerProducts() {
   const handlePrice = (e) => {
     const { name } = e.target;
 
+    const product = products.find((p) => p.name === name);
+
+    const inputValue = document.getElementsByName(product.name)[1].value;
+
     switch (e.target.id) {
     case 'input-price':
-      setProductsPrice({ ...productsPrice, [name]: Number(e.target.value) });
+      setProductsQuantity({ ...productsQuantity, [name]: Number(e.target.value) });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: Number(e.target.value) * Number(product.price),
+        },
+      );
       break;
 
     case 'button-price-plus':
-      setProductsPrice({
-        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] += 1 : 1),
+      setProductsQuantity({
+        ...productsQuantity,
+        [name]: (productsQuantity[name] ? productsQuantity[name] += 1 : 1),
       });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: (Number(inputValue) * Number(product.price)) + Number(product.price),
+        },
+      );
       break;
 
     case 'button-price-less':
-      setProductsPrice({
-        ...productsPrice, [name]: (productsPrice[name] ? productsPrice[name] -= 1 : 0),
+      setProductsQuantity({
+        ...productsQuantity,
+        [name]: (productsQuantity[name] ? productsQuantity[name] -= 1 : 0),
       });
+      setCartProducts(
+        {
+          ...cartProducts,
+          [name]: (Number(inputValue) * Number(product.price)) - Number(product.price),
+        },
+      );
       break;
     default:
       break;
     }
   };
 
+  const getTotalPrice = () => {
+    // Pega o valor total de cada item com sua respectiva quantidade
+    const cart = Object.entries(cartProducts);
+
+    let totalPrice = 0;
+
+    // Soma todos no reduce e retorna para totalPrice
+    totalPrice = cart.reduce((acc, currentProduct) => acc + currentProduct[1], 0);
+
+    totalPrice = totalPrice.toFixed(2);
+
+    return String(totalPrice).replace(/\./, ',');
+  };
+
   return (
     <div>
       <div className="header-container">
-      {/* <nav className="menu-header"> */}
         <ul>
           <li
             className="products-header"
@@ -80,7 +119,6 @@ function CustomerProducts() {
             Meus pedidos
           </li>
         </ul>
-
         <div className="client-and-button-header">
           <ul>
             <li
@@ -98,12 +136,12 @@ function CustomerProducts() {
             Sair
           </button>
         </div>
-        
       </div>
-      {/* </nav> */}
+
       <div className="page-products-container">
-      { products.map((product) => (
-        <div className="card-produtcs"
+        { products.map((product) => (
+        <div
+          className="card-produtcs"
           key={ product.id }
         >
           <h2
@@ -133,9 +171,9 @@ function CustomerProducts() {
               -
             </button>
             <input
-              type="text"
+              type="number"
               data-testid={ `customer_products__input-card-quantity-${product.id}` }
-              value={ productsPrice[product.name] }
+              value={ productsQuantity[product.name] }
               defaultValue={ 0 }
               name={ product.name }
               onChange={ handlePrice }
@@ -151,24 +189,25 @@ function CustomerProducts() {
             >
               +
             </button>
-          </div>
-        </div>
-      )) }
-        <div className="button-ver-carrinho ">
-          <button
-            type="button"
-            onClick={ moveToCheckout }
-            data-testid="customer_products__button-cart"
-          >
-            Ver carrinho: R$
-            <strong
-              data-testid="customer_products__checkout-bottom-value"
-            >
-              {`125,00`}
-            </strong>
-          </button>
         </div>
       </div>
+      )) }
+      <div className="button-ver-carrinho ">
+        <button
+          type="button"
+          onClick={ moveToCheckout }
+          data-testid="customer_products__button-cart"
+          disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
+        >
+          Ver carrinho: R$
+          <strong
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            { getTotalPrice() }
+          </strong>
+        </button>
+      </div>
+    </div>
     </div>
   );
 }
