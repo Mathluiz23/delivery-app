@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/products.css';
@@ -7,8 +7,9 @@ import MyContext from '../../contexts/myContext';
 import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerProducts() {
-  const [products, setProducts] = useState([]);
   const {
+    products,
+    setProducts,
     setUsername,
     productsQuantity,
     setProductsQuantity,
@@ -52,7 +53,9 @@ function CustomerProducts() {
 
     switch (e.target.id) {
     case 'input-price':
-      setProductsQuantity({ ...productsQuantity, [name]: Number(e.target.value) });
+      setProductsQuantity({
+        ...productsQuantity, [name]: Number(e.target.value),
+      });
       setCartProducts(
         {
           ...cartProducts,
@@ -91,20 +94,6 @@ function CustomerProducts() {
     }
   };
 
-/*   const getTotalPrice = () => {
-    // Pega o valor total de cada item com sua respectiva quantidade
-    const cart = Object.entries(cartProducts);
-
-    let totalPrice = 0;
-
-    // Soma todos no reduce e retorna para totalPrice
-    totalPrice = cart.reduce((acc, currentProduct) => acc + currentProduct[1], 0);
-
-    totalPrice = totalPrice.toFixed(2);
-
-    return String(totalPrice).replace(/\./, ',');
-  }; */
-
   return (
     <div>
       <NavBarCustomer />
@@ -141,7 +130,7 @@ function CustomerProducts() {
                 -
               </button>
               <input
-                type="number"
+                type="text"
                 data-testid={ `customer_products__input-card-quantity-${product.id}` }
                 value={ productsQuantity[product.name] }
                 defaultValue={ 0 }
