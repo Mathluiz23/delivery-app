@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../../styles/products.css';
 import NavBarCustomer from './navBarCustomer';
 import MyContext from '../../contexts/myContext';
+import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
@@ -90,7 +91,7 @@ function CustomerProducts() {
     }
   };
 
-  const getTotalPrice = () => {
+/*   const getTotalPrice = () => {
     // Pega o valor total de cada item com sua respectiva quantidade
     const cart = Object.entries(cartProducts);
 
@@ -102,7 +103,7 @@ function CustomerProducts() {
     totalPrice = totalPrice.toFixed(2);
 
     return String(totalPrice).replace(/\./, ',');
-  };
+  }; */
 
   return (
     <div>
@@ -166,13 +167,13 @@ function CustomerProducts() {
             type="button"
             onClick={ moveToCheckout }
             data-testid="customer_products__button-cart"
-            disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
+            disabled={ getTotalPrice(cartProducts) === CART_WITH_NO_ITEMS }
           >
             Ver carrinho: R$
             <strong
               data-testid="customer_products__checkout-bottom-value"
             >
-              { getTotalPrice() }
+              { getTotalPrice(cartProducts) }
             </strong>
           </button>
         </div>
