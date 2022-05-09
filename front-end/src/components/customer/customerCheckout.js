@@ -1,6 +1,6 @@
 import React from 'react';
 
-function CustomerCheckout () {
+function CustomerCheckout() {
   return (
     <div>
       oi

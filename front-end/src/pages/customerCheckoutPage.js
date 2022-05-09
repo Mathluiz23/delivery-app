@@ -1,10 +1,10 @@
 import React from 'react';
 import CustomerCheckout from '../components/customer/customerCheckout';
 
-function CustomerCheckoutPage () {
+function CustomerCheckoutPage() {
   return (
     <CustomerCheckout />
   );
-};
+}
 
 export default CustomerCheckoutPage;
