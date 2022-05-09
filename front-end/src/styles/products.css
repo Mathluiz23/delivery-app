@@ -1,0 +1,160 @@
+.page-products-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-bottom: 30px;
+  margin-top: 30px;
+  width: 80%;
+}
+
+.header-container {
+  background-color: #ffd803;
+  box-shadow: 2px 5px 8px black;
+  display: flex;
+  height: 100px;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.header-container ul {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+}
+
+.header-container li {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  font-size: 18px;
+  height: 50px;
+  justify-content: space-around;
+  margin: 10px;
+  width: 150px;
+}
+
+.header-container li:hover {
+  background-color: rgb(248, 162, 5);
+}
+
+
+.client-and-button-header {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 0;
+  width: 30%;
+}
+
+.button-go-out {
+  align-items: center;
+  background-color: rgb(248, 162, 5);
+  display: flex;
+  font-size: 18px;
+  height: 100%;
+  justify-content: center;
+  width: 100px;
+}
+
+.card-produtcs {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 2px 2px 5px black;
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  margin: auto;
+  margin-top: 15px;
+  width: 280px;
+}
+
+.card-produtcs:hover {
+  box-shadow: 5px 6px 5px rgb(255, 255, 44);
+  transform: scale(1.05);
+  transition: 1.3s;
+}
+
+.card-produtcs img {
+  border-radius: 8px;
+  height: 180px;
+  margin: auto;
+  width: 180px;
+}
+
+.button-ver-carrinho {
+  display: flex;
+  height: 50px;
+  justify-content: end;
+  margin-top: auto;
+  min-width: 200px;
+  width: 30%;
+}
+
+
+.button-ver-carrinho button {
+  background-color: rgb(26, 112, 26);
+  border-radius: 5px;
+  color: white;
+  font-size: 18px;
+  font-weight: 700;
+  width: 100%;
+}
+
+.card-produtcs h2 {
+  align-items: center;
+  background-color: #ffd803;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  margin: 10px;
+  padding: 5px;
+  width: 80px;
+}
+
+.card-produtcs h3 {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  margin: 5px;
+}
+
+.quantity-produtc {
+  display: flex;
+  justify-content: center;
+}
+
+.quantity-produtc input {
+  align-items: center;
+  border-bottom: solid 1.5px black;
+  border-top: solid 1.5px black;
+  display: flex;
+  height: 50px;
+  justify-content: center;
+  text-align: center;
+  width: 80px;
+}
+
+.button-add {
+  align-items: center;
+  background-color: rgb(26, 112, 26);
+  border-radius: 0 10px 10px 0;
+  color: white;
+  display: flex;
+  font-size: 35px;
+  height: 50px;
+  justify-content: center;
+  width: 50px;
+}
+
+.button-substr {
+  align-items: center;
+  background-color: rgb(26, 112, 26);
+  border-radius: 10px 0 0 10px;
+  color: white;
+  display: flex;
+  font-size: 35px;
+  height: 50px;
+  justify-content: center;
+  width: 50px;
+}
