@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import MyContext from '../../contexts/myContext';
+import NavBarCustomer from './navBarCustomer';
 
 function CustomerCheckout() {
+  const { userName, logout } = useContext(MyContext);
+
   return (
     <div>
-      oi
+      <NavBarCustomer />
     </div>
   );
 };

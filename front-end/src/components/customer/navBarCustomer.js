@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import MyContext from '../../contexts/myContext';
 
-function NavBarCustomer (userName, logout) {
+function NavBarCustomer() {
+  const { userName, logout } = useContext(MyContext);
+
   return (
     <div className="header-container">
       <ul>
@@ -36,6 +39,6 @@ function NavBarCustomer (userName, logout) {
       </div>
     </div>
   );
-};
+}
 
 export default NavBarCustomer;

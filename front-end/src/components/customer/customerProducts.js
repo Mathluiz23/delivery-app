@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../../styles/products.css';
 import NavBarCustomer from './navBarCustomer';
+import MyContext from '../../contexts/myContext';
 
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
@@ -104,79 +105,81 @@ function CustomerProducts() {
   };
 
   return (
-    <div>
-      <NavBarCustomer userName={ userName } logout={ logout } />
-      <div className="page-products-container">
-        { products.map((product) => (
-          <div
-            className="card-produtcs"
-            key={ product.id }
-          >
-            <h2
-              data-testid={ `customer_products__element-card-price-${product.id}` }
+    <MyContext.Provider value={ { userName, logout } }>
+      <div>
+        <NavBarCustomer />
+        <div className="page-products-container">
+          { products.map((product) => (
+            <div
+              className="card-produtcs"
+              key={ product.id }
             >
-              { product.price.replace(/\./, ',') }
-            </h2>
-            <img
-              alt="imagem do produto"
-              src={ product.url_image }
-              data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-            />
-            <h3
-              data-testid={ `customer_products__element-card-title-${product.id}` }
-            >
-              { product.name }
-            </h3>
-            <div className="quantity-produtc">
-              <button
-                type="button"
-                data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-                name={ product.name }
-                onClick={ handlePrice }
-                id="button-price-less"
-                className="button-substr"
+              <h2
+                data-testid={ `customer_products__element-card-price-${product.id}` }
               >
-                -
-              </button>
-              <input
-                type="number"
-                data-testid={ `customer_products__input-card-quantity-${product.id}` }
-                value={ productsQuantity[product.name] }
-                defaultValue={ 0 }
-                name={ product.name }
-                onChange={ handlePrice }
-                id="input-price"
+                { product.price.replace(/\./, ',') }
+              </h2>
+              <img
+                alt="imagem do produto"
+                src={ product.url_image }
+                data-testid={ `customer_products__img-card-bg-image-${product.id}` }
               />
-              <button
-                type="button"
-                data-testid={ `customer_products__button-card-add-item-${product.id}` }
-                name={ product.name }
-                onClick={ handlePrice }
-                id="button-price-plus"
-                className="button-add"
+              <h3
+                data-testid={ `customer_products__element-card-title-${product.id}` }
               >
-                +
-              </button>
+                { product.name }
+              </h3>
+              <div className="quantity-produtc">
+                <button
+                  type="button"
+                  data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+                  name={ product.name }
+                  onClick={ handlePrice }
+                  id="button-price-less"
+                  className="button-substr"
+                >
+                  -
+                </button>
+                <input
+                  type="number"
+                  data-testid={ `customer_products__input-card-quantity-${product.id}` }
+                  value={ productsQuantity[product.name] }
+                  defaultValue={ 0 }
+                  name={ product.name }
+                  onChange={ handlePrice }
+                  id="input-price"
+                />
+                <button
+                  type="button"
+                  data-testid={ `customer_products__button-card-add-item-${product.id}` }
+                  name={ product.name }
+                  onClick={ handlePrice }
+                  id="button-price-plus"
+                  className="button-add"
+                >
+                  +
+                </button>
+              </div>
             </div>
-          </div>
-        )) }
-        <div className="button-ver-carrinho ">
-          <button
-            type="button"
-            onClick={ moveToCheckout }
-            data-testid="customer_products__button-cart"
-            disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
-          >
-            Ver carrinho: R$
-            <strong
-              data-testid="customer_products__checkout-bottom-value"
+          )) }
+          <div className="button-ver-carrinho ">
+            <button
+              type="button"
+              onClick={ moveToCheckout }
+              data-testid="customer_products__button-cart"
+              disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
             >
-              { getTotalPrice() }
-            </strong>
-          </button>
+              Ver carrinho: R$
+              <strong
+                data-testid="customer_products__checkout-bottom-value"
+              >
+                { getTotalPrice() }
+              </strong>
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+    </MyContext.Provider>
   );
 }
 
