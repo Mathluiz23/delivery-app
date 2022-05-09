@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../styles/products.css';
+import NavBarCustomer from './navBarCustomer';
 
 function CustomerProducts() {
   const [products, setProducts] = useState([]);
@@ -104,40 +105,7 @@ function CustomerProducts() {
 
   return (
     <div>
-      <div className="header-container">
-        <ul>
-          <li
-            className="products-header"
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </li>
-          <li
-            className="my-requests-header"
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            Meus pedidos
-          </li>
-        </ul>
-        <div className="client-and-button-header">
-          <ul>
-            <li
-              data-testid="customer_products__element-navbar-user-full-name"
-            >
-              {userName}
-            </li>
-          </ul>
-          <button
-            className="button-go-out"
-            type="button"
-            data-testid="customer_products__element-navbar-link-logout"
-            onClick={ logout }
-          >
-            Sair
-          </button>
-        </div>
-      </div>
-
+      <NavBarCustomer userName={ userName } logout={ logout } />
       <div className="page-products-container">
         { products.map((product) => (
           <div
