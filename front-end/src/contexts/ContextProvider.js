@@ -4,12 +4,15 @@ import MyContext from './myContext';
 
 const Provider = ({ children }) => {
   const [userName, setUsername] = useState('');
+  const [products, setProducts] = useState([]);
   const [productsQuantity, setProductsQuantity] = useState({});
   const [cartProducts, setCartProducts] = useState({});
 
   const contextValue = {
     userName,
     setUsername,
+    products,
+    setProducts,
     productsQuantity,
     setProductsQuantity,
     cartProducts,
