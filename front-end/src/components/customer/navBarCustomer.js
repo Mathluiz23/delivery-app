@@ -1,6 +1,6 @@
 import React from 'react';
 
-function NavBarCustomer (userName, logout) {
+function NavBarCustomer (props) {
   return (
     <div className="header-container">
       <ul>
@@ -22,14 +22,14 @@ function NavBarCustomer (userName, logout) {
           <li
             data-testid="customer_products__element-navbar-user-full-name"
           >
-            {userName}
+            {props.userName}
           </li>
         </ul>
         <button
           className="button-go-out"
           type="button"
           data-testid="customer_products__element-navbar-link-logout"
-          onClick={ logout }
+          onClick={ props.logout }
         >
           Sair
         </button>
