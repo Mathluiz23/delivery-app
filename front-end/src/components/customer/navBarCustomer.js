@@ -1,8 +1,15 @@
 import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import MyContext from '../../contexts/myContext';
 
 function NavBarCustomer() {
-  const { userName, logout } = useContext(MyContext);
+  const { userName } = useContext(MyContext);
+  const navigate = useNavigate();
+
+  const logout = () => {
+    localStorage.clear();
+    navigate('/login');
+  };
 
   return (
     <div className="header-container">
