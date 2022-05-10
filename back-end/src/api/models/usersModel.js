@@ -8,6 +8,12 @@ const usersModel = {
     return response;
   },
 
+  getUserIdByName: async (name) => {
+    const response = await user.findOne({ where: { name } });
+
+    return response.id;
+  },
+
   getUserByNameAndEmail: async (name, email) => {
     // busca no banco um usuário que bate com o nome OU com o email
     // passados por parâmetro
