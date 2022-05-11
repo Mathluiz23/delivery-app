@@ -7,6 +7,10 @@ import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerCheckout() {
   const [sellers, setSellers] = useState([]);
+  const [selectValue, setSelectValue] = useState(sellers[0].name);
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [deliveryNumber, setDeliveryNumber] = useState('');
+
   const {
     products,
     productsQuantity,
@@ -46,10 +50,10 @@ function CustomerCheckout() {
   const orderCheckout = async () => {
     const payload = {
       userName: JSON.parse(localStorage.getItem('name')),
-      sellerName: 'alguém',
+      sellerName: selectValue,
       totalPrice: getTotalPrice(cartProducts),
-      deliveryAddress: 'rua sla',
-      deliveryNumber: 13,
+      deliveryAddress: deliveryAddress,
+      deliveryNumber: deliveryNumber,
       saleDate: Date.now(),
       status: 'pendente',
     };
@@ -124,17 +128,24 @@ function CustomerCheckout() {
       <section>
         <select
           data-testid="customer_checkout__select-seller"
+          onChange={ (e) => setSelectValue(e.target.value) }
         >
           { sellers
-            .map((seller, index) => <option key={ index }>{ seller.name }</option>) }
+            .map((seller, index) => (
+              <option key={ index } value={ seller.name }>
+                { seller.name }
+              </option>
+            )) }
         </select>
         <input
           type="text"
           data-testid="customer_checkout__input-address"
+          onChange={ (e) => setDeliveryAddress(e.target.value) }
         />
         <input
           type="text"
           data-testid="customer_checkout__input-addressNumber"
+          onChange={ (e) => setDeliveryNumber(e.target.value) }
         />
       </section>
       <button
