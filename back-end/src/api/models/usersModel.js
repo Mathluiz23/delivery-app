@@ -26,6 +26,15 @@ const usersModel = {
     return response;
   },
 
+  getAllSellers: async () => {
+    const sellers = await user.findAll({
+      where: { role: 'seller' },
+      attributes: { exclude: ['id', 'email', 'password', 'role'] },
+    });
+
+    return sellers;
+  },
+
   create: async (name, email, password) => {
     const newUser = await user.create({ name, email, password, role: 'customer' });
 

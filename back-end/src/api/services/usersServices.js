@@ -15,6 +15,16 @@ const usersService = {
     return { ...user.dataValues, token };
   },
 
+  getAllSellers: async () => {
+    const sellers = await UsersModel.getAllSellers();
+
+    if (!sellers) {
+      return { message: LoginErrors.badRequest };
+    }
+
+    return sellers;
+  },
+
   create: async (name, email, password) => {
     const userExists = await UsersModel.getUserByNameAndEmail(name, email);
 
