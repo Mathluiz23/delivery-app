@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import axios from 'axios';
 import NavBarCustomer from './navBarCustomer';
 import MyContext from '../../contexts/myContext';
 import getTotalPrice from '../../helpers/getTotalPrice';
@@ -99,7 +100,8 @@ function CustomerCheckout() {
         <select
           data-testid="customer_checkout__select-seller"
         >
-          { sellers.map((seller, index) => <option key={ index }>{ seller }</option>) }
+          { sellers
+              .map((seller, index) => <option key={ index }>{ seller.name }</option>) }
         </select>
         <input
           type="text"
