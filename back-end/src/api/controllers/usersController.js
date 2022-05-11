@@ -16,7 +16,7 @@ const usersController = {
     return res.status(StatusCode.OK).json(response);
   },
 
-  getAllSellers: async (req, res) => {
+  getAllSellers: async (_req, res) => {
     const response = await UsersService.getAllSellers();
 
     if (response.message) {
