@@ -9,6 +9,7 @@ const router = Router();
 
 router.use(loginRouter);
 router.use(registerRouter);
+
 router.use(customerProductsRouter);
 router.use(orderDetails);
 router.use(sellersRouter);

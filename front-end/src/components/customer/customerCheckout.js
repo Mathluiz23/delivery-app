@@ -7,7 +7,7 @@ import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerCheckout() {
   const [sellers, setSellers] = useState([]);
-  const [selectValue, setSelectValue] = useState(sellers[0].name);
+  const [selectValue, setSelectValue] = useState('Fulana Pereira');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
 
@@ -36,39 +36,46 @@ function CustomerCheckout() {
   const deleteItem = (e, object, position) => {
     const total = document.getElementsByTagName('h3')[0];
 
+    // console.log(object);
+
     delete object[position];
 
     const item = document.getElementById('all-items');
     item.removeChild(e.target.parentNode);
 
+    // console.log(object);
     setCartProducts(object);
     total.innerText = `Total: R$${getTotalPrice(cartProducts)}`;
   };
 
-  const token = JSON.parse(localStorage.getItem('token'));
+  const { token } = JSON.parse(localStorage.getItem('user'));
 
   const orderCheckout = async () => {
     const payload = {
-      userName: JSON.parse(localStorage.getItem('name')),
+      userName: JSON.parse(localStorage.getItem('user')).name,
       sellerName: selectValue,
-      totalPrice: getTotalPrice(cartProducts),
-      deliveryAddress: deliveryAddress,
-      deliveryNumber: deliveryNumber,
+      totalPrice: Number(getTotalPrice(cartProducts).replace(/,/, '.')),
+      deliveryAddress,
+      deliveryNumber,
       saleDate: Date.now(),
       status: 'pendente',
     };
 
     const response = await axios.post(
       'http://localhost:3001/customer/orders',
-      { payload },
+      payload,
       { headers: { authorization: token } },
     );
 
-    navigate(`/customer/orders/${response.id}`);
+    const id = response.data;
+
+    console.log(response);
+
+    navigate(`/customer/orders/${id}`);
   };
 
-  // subtotal -> nome e subtotal
-  const subtotal = Object.entries(cartProducts);
+  // cart -> nome e subtotal
+  const cart = Object.entries(cartProducts);
 
   // quantity -> nome e quantidade
   const quantity = Object.entries(productsQuantity);
@@ -76,7 +83,7 @@ function CustomerCheckout() {
   return (
     <div id="all-items">
       <NavBarCustomer />
-      { subtotal.map((item, index) => {
+      { cart.map((item, index) => {
         const product = products.find((p) => p.name === item[0]);
 
         return (
