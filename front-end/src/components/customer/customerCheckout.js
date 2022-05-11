@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import NavBarCustomer from './navBarCustomer';
 import MyContext from '../../contexts/myContext';
 import getTotalPrice from '../../helpers/getTotalPrice';
@@ -11,6 +12,8 @@ function CustomerCheckout() {
     cartProducts,
     setCartProducts,
   } = useContext(MyContext);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,6 +40,28 @@ function CustomerCheckout() {
     total.innerText = `Total: R$${getTotalPrice(cartProducts)}`;
   };
 
+  const token = JSON.parse(localStorage.getItem('token'));
+
+  const orderCheckout = async () => {
+    const payload = {
+      userName: JSON.parse(localStorage.getItem('name')),
+      sellerName: 'alguém',
+      totalPrice: getTotalPrice(cartProducts),
+      deliveryAddress: 'rua sla',
+      deliveryNumber: 13,
+      saleDate: Date.now(),
+      status: 'pendente',
+    };
+
+    const response = await axios.post(
+      'http://localhost:3001/customer/orders',
+      { payload },
+      { headers: { authorization: token } },
+    );
+
+    navigate(`/customer/orders/${response.id}`);
+  };
+
   // subtotal -> nome e subtotal
   const subtotal = Object.entries(cartProducts);
 
@@ -50,7 +75,7 @@ function CustomerCheckout() {
         const product = products.find((p) => p.name === item[0]);
 
         return (
-          <div key={ index }>
+          <div key={ index } style={ { padding: '30px' } }>
             <h4
               data-testid={
                 `customer_checkout__element-order-table-item-number-${index}`
@@ -113,6 +138,7 @@ function CustomerCheckout() {
       <button
         type="button"
         data-testid="customer_checkout__button-submit-order"
+        onClick={ orderCheckout }
       >
         Finalizar pedido
       </button>
