@@ -15,6 +15,15 @@ const customerOrdersService = {
 
     return response;
   },
+
+  createSaleProduct: async (saleId, array) => {
+    // array = [[productId, productQuantity]];
+
+    const salesProducts = array
+      .map((element) => customerOrdersModel.createSaleProduct(saleId, element[0], element[1]));
+
+    await Promise.all(salesProducts);
+  },
 };
 
 module.exports = customerOrdersService;
