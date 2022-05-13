@@ -8,6 +8,7 @@ import getTotalPrice from '../../helpers/getTotalPrice';
 function CustomerCheckout() {
   const [sellers, setSellers] = useState([]);
   const [selectValue, setSelectValue] = useState('Fulana Pereira');
+  const [cart, setCart] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
 
@@ -15,7 +16,6 @@ function CustomerCheckout() {
     products,
     productsQuantity,
     cartProducts,
-    setCartProducts,
   } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -30,22 +30,22 @@ function CustomerCheckout() {
       }
     };
 
-    fetchData();
-  }, [cartProducts]);
+    // cart -> nome e subtotal
+    setCart(Object.entries(cartProducts));
 
-  const deleteItem = (e, object, position) => {
+    fetchData();
+  }, []);
+
+  const deleteItem = (_e, cartParameter, position) => {
     const total = document.getElementsByTagName('h3')[0];
 
-    // console.log(object);
+    delete cartProducts[position];
+    delete productsQuantity[position];
 
-    delete object[position];
+    const newCart = cartParameter.filter((product) => product[0] !== position);
 
-    const item = document.getElementById('all-items');
-    item.removeChild(e.target.parentNode);
-
-    // console.log(object);
-    setCartProducts(object);
-    total.innerText = `Total: R$${getTotalPrice(cartProducts)}`;
+    setCart(newCart);
+    total.innerText = `Total: R$${getTotalPrice(newCart)}`;
   };
 
   const { token } = JSON.parse(localStorage.getItem('user'));
@@ -69,13 +69,8 @@ function CustomerCheckout() {
 
     const id = response.data;
 
-    console.log(response);
-
     navigate(`/customer/orders/${id}`);
   };
-
-  // cart -> nome e subtotal
-  const cart = Object.entries(cartProducts);
 
   // quantity -> nome e quantidade
   const quantity = Object.entries(productsQuantity);
@@ -120,7 +115,7 @@ function CustomerCheckout() {
             <button
               type="button"
               data-testid={ `customer_checkout__element-order-table-remove-${index}` }
-              onClick={ (e) => deleteItem(e, cartProducts, product.name) }
+              onClick={ (e) => deleteItem(e, cart, product.name) }
             >
               Remover
             </button>
