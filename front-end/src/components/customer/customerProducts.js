@@ -64,9 +64,7 @@ function CustomerProducts() {
 
     const inputValue = document.getElementsByName(product.name)[1].value;
 
-    setProductsId({
-      ...productsId, [name]: product.id,
-    });
+    setProductsId({ ...productsId, [name]: product.id });
 
     switch (e.target.id) {
     case 'input-price':
