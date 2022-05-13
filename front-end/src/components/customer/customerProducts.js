@@ -1,13 +1,25 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import '../styles/products.css';
+import '../../styles/products.css';
+import NavBarCustomer from './navBarCustomer';
+import MyContext from '../../contexts/myContext';
+import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerProducts() {
-  const [products, setProducts] = useState([]);
-  const [userName, setUsername] = useState('');
-  const [productsQuantity, setProductsQuantity] = useState({});
-  const [cartProducts, setCartProducts] = useState({});
+  const {
+    products,
+    setProducts,
+    setUsername,
+    productsQuantity,
+    setProductsQuantity,
+    cartProducts,
+    setCartProducts,
+    setSellers,
+    productsId,
+    setProductsId,
+  } = useContext(MyContext);
+
   const navigate = useNavigate();
   const CART_WITH_NO_ITEMS = '0,00';
 
@@ -15,11 +27,6 @@ function CustomerProducts() {
     const objLocalStorage = localStorage.getItem('user');
 
     setUsername(JSON.parse(objLocalStorage).name);
-  };
-
-  const logout = () => {
-    localStorage.clear();
-    navigate('/login');
   };
 
   const moveToCheckout = () => {
@@ -36,7 +43,17 @@ function CustomerProducts() {
       }
     };
 
+    const fetchDataSellers = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/sellers');
+        setSellers(response.data);
+      } catch (error) {
+        console.error('Failed to fetch http://localhost:3001/sellers');
+      }
+    };
+
     fetchData();
+    fetchDataSellers();
     getUserFromLocalStorage();
   }, []);
 
@@ -47,9 +64,13 @@ function CustomerProducts() {
 
     const inputValue = document.getElementsByName(product.name)[1].value;
 
+    setProductsId({ ...productsId, [name]: product.id });
+
     switch (e.target.id) {
     case 'input-price':
-      setProductsQuantity({ ...productsQuantity, [name]: Number(e.target.value) });
+      setProductsQuantity({
+        ...productsQuantity, [name]: Number(e.target.value),
+      });
       setCartProducts(
         {
           ...cartProducts,
@@ -88,56 +109,9 @@ function CustomerProducts() {
     }
   };
 
-  const getTotalPrice = () => {
-    // Pega o valor total de cada item com sua respectiva quantidade
-    const cart = Object.entries(cartProducts);
-
-    let totalPrice = 0;
-
-    // Soma todos no reduce e retorna para totalPrice
-    totalPrice = cart.reduce((acc, currentProduct) => acc + currentProduct[1], 0);
-
-    totalPrice = totalPrice.toFixed(2);
-
-    return String(totalPrice).replace(/\./, ',');
-  };
-
   return (
     <div>
-      <div className="header-container">
-        <ul>
-          <li
-            className="products-header"
-            data-testid="customer_products__element-navbar-link-products"
-          >
-            Produtos
-          </li>
-          <li
-            className="my-requests-header"
-            data-testid="customer_products__element-navbar-link-orders"
-          >
-            Meus pedidos
-          </li>
-        </ul>
-        <div className="client-and-button-header">
-          <ul>
-            <li
-              data-testid="customer_products__element-navbar-user-full-name"
-            >
-              {userName}
-            </li>
-          </ul>
-          <button
-            className="button-go-out"
-            type="button"
-            data-testid="customer_products__element-navbar-link-logout"
-            onClick={ logout }
-          >
-            Sair
-          </button>
-        </div>
-      </div>
-
+      <NavBarCustomer />
       <div className="page-products-container">
         { products.map((product) => (
           <div
@@ -171,7 +145,7 @@ function CustomerProducts() {
                 -
               </button>
               <input
-                type="number"
+                type="text"
                 data-testid={ `customer_products__input-card-quantity-${product.id}` }
                 value={ productsQuantity[product.name] }
                 defaultValue={ 0 }
@@ -197,13 +171,13 @@ function CustomerProducts() {
             type="button"
             onClick={ moveToCheckout }
             data-testid="customer_products__button-cart"
-            disabled={ getTotalPrice() === CART_WITH_NO_ITEMS }
+            disabled={ getTotalPrice(cartProducts) === CART_WITH_NO_ITEMS }
           >
             Ver carrinho: R$
             <strong
               data-testid="customer_products__checkout-bottom-value"
             >
-              { getTotalPrice() }
+              { getTotalPrice(cartProducts) }
             </strong>
           </button>
         </div>

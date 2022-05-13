@@ -8,6 +8,12 @@ const usersModel = {
     return response;
   },
 
+  getUserIdByName: async (name) => {
+    const response = await user.findOne({ where: { name } });
+
+    return response.id;
+  },
+
   getUserByNameAndEmail: async (name, email) => {
     // busca no banco um usuário que bate com o nome OU com o email
     // passados por parâmetro
@@ -18,6 +24,15 @@ const usersModel = {
     });
 
     return response;
+  },
+
+  getAllSellers: async () => {
+    const sellers = await user.findAll({
+      where: { role: 'seller' },
+      attributes: { exclude: ['id', 'email', 'password', 'role'] },
+    });
+
+    return sellers;
   },
 
   create: async (name, email, password) => {

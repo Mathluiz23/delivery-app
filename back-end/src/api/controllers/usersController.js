@@ -16,6 +16,16 @@ const usersController = {
     return res.status(StatusCode.OK).json(response);
   },
 
+  getAllSellers: async (_req, res) => {
+    const response = await UsersService.getAllSellers();
+
+    if (response.message) {
+      return res.status(StatusCode.InternalServerError).json(response);
+    }
+  
+    return res.status(StatusCode.OK).json(response);
+  },
+
   create: async (req, res) => {
     const { name, email } = req.body;
     const password = encryptPassword(req.body.password);
