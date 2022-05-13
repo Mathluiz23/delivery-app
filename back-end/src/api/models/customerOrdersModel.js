@@ -1,4 +1,4 @@
-const { sale } = require('../../database/models');
+const { sale, salesProduct } = require('../../database/models');
 
 const customerOrdersModel = {
   create: async (userId, sellerId, payload) => {
@@ -13,6 +13,10 @@ const customerOrdersModel = {
       });
 
       return newSale;
+  },
+
+  createSaleProduct: async (saleId, productId, quantity) => {
+    await salesProduct.create({ saleId, productId, quantity });
   },
 };
 
