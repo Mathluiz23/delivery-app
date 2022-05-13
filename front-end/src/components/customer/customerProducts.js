@@ -16,6 +16,8 @@ function CustomerProducts() {
     cartProducts,
     setCartProducts,
     setSellers,
+    productsId,
+    setProductsId,
   } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -61,6 +63,10 @@ function CustomerProducts() {
     const product = products.find((p) => p.name === name);
 
     const inputValue = document.getElementsByName(product.name)[1].value;
+
+    setProductsId({
+      ...productsId, [name]: product.id,
+    });
 
     switch (e.target.id) {
     case 'input-price':

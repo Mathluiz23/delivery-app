@@ -18,6 +18,7 @@ function CustomerCheckout() {
     productsQuantity,
     cartProducts,
     sellers,
+    productsId,
   } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ function CustomerCheckout() {
 
     delete cartProducts[position];
     delete productsQuantity[position];
+    delete productsId[position];
 
     const newCart = cartParameter.filter((product) => product[0] !== position);
 
@@ -39,9 +41,26 @@ function CustomerCheckout() {
     total.innerText = `Total: R$${getTotalPrice(newCart)}`;
   };
 
+  const getIdAndQuantity = (objProductsId, objProductsQuantity) => {
+    const array = [];
+
+    const ids = Object.values(objProductsId);
+    console.log(ids);
+    const quantities = Object.values(objProductsQuantity);
+    console.log(quantities);
+
+    for (let i = 0; i < ids.length; i += 1) {
+      array.push([ids[i], quantities[i]]);
+    }
+
+    return array;
+  };
+
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   const orderCheckout = async () => {
+    const salesProductsData = getIdAndQuantity(productsId, productsQuantity);
+
     const payload = {
       userName: JSON.parse(localStorage.getItem('user')).name,
       sellerName: FIRST_SELLER,
@@ -49,7 +68,8 @@ function CustomerCheckout() {
       deliveryAddress,
       deliveryNumber,
       saleDate: Date.now(),
-      status: 'pendente',
+      status: 'Pendente',
+      salesProductsData,
     };
 
     const response = await axios.post(

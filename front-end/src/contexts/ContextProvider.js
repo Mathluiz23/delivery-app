@@ -6,6 +6,7 @@ const Provider = ({ children }) => {
   const [userName, setUsername] = useState('');
   const [products, setProducts] = useState([]);
   const [productsQuantity, setProductsQuantity] = useState({});
+  const [productsId, setProductsId] = useState({});
   const [cartProducts, setCartProducts] = useState({});
   const [sellers, setSellers] = useState([]);
 
@@ -20,6 +21,8 @@ const Provider = ({ children }) => {
     setCartProducts,
     sellers,
     setSellers,
+    productsId,
+    setProductsId,
   };
 
   return (
