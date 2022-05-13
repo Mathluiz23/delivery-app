@@ -6,8 +6,9 @@ import MyContext from '../../contexts/myContext';
 import getTotalPrice from '../../helpers/getTotalPrice';
 
 function CustomerCheckout() {
-  const [sellers, setSellers] = useState([]);
-  const [selectValue, setSelectValue] = useState('Fulana Pereira');
+  const FIRST_SELLER = 'Fulana Pereira';
+
+  const [selectValue, setSelectValue] = useState(FIRST_SELLER);
   const [cart, setCart] = useState([]);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
@@ -16,24 +17,14 @@ function CustomerCheckout() {
     products,
     productsQuantity,
     cartProducts,
+    sellers,
   } = useContext(MyContext);
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('http://localhost:3001/sellers');
-        setSellers(response.data);
-      } catch (error) {
-        console.error('Failed to fetch http://localhost:3001/sellers');
-      }
-    };
-
     // cart -> nome e subtotal
     setCart(Object.entries(cartProducts));
-
-    fetchData();
   }, []);
 
   const deleteItem = (_e, cartParameter, position) => {
@@ -53,7 +44,7 @@ function CustomerCheckout() {
   const orderCheckout = async () => {
     const payload = {
       userName: JSON.parse(localStorage.getItem('user')).name,
-      sellerName: selectValue,
+      sellerName: FIRST_SELLER,
       totalPrice: Number(getTotalPrice(cartProducts).replace(/,/, '.')),
       deliveryAddress,
       deliveryNumber,
@@ -131,6 +122,7 @@ function CustomerCheckout() {
         <select
           data-testid="customer_checkout__select-seller"
           onChange={ (e) => setSelectValue(e.target.value) }
+          value={ selectValue }
         >
           { sellers
             .map((seller, index) => (

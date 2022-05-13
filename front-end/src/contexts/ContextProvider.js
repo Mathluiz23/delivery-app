@@ -7,6 +7,7 @@ const Provider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [productsQuantity, setProductsQuantity] = useState({});
   const [cartProducts, setCartProducts] = useState({});
+  const [sellers, setSellers] = useState([]);
 
   const contextValue = {
     userName,
@@ -17,6 +18,8 @@ const Provider = ({ children }) => {
     setProductsQuantity,
     cartProducts,
     setCartProducts,
+    sellers,
+    setSellers,
   };
 
   return (

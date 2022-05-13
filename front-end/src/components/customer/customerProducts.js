@@ -15,6 +15,7 @@ function CustomerProducts() {
     setProductsQuantity,
     cartProducts,
     setCartProducts,
+    setSellers,
   } = useContext(MyContext);
 
   const navigate = useNavigate();
@@ -40,7 +41,17 @@ function CustomerProducts() {
       }
     };
 
+    const fetchDataSellers = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/sellers');
+        setSellers(response.data);
+      } catch (error) {
+        console.error('Failed to fetch http://localhost:3001/sellers');
+      }
+    };
+
     fetchData();
+    fetchDataSellers();
     getUserFromLocalStorage();
   }, []);
 
