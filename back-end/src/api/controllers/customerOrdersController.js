@@ -3,15 +3,18 @@ const customerOrdersService = require('../services/customerOrdersService');
 
 const customerOrdersController = {
   createOrder: async (req, res) => {
-    // userName, sellerName, totalPrice, deliveryAddress, deliveryNumber, saleDate, status -> vem no req.body
+    // userName, sellerName, totalPrice, deliveryAddress, deliveryNumber, saleDate, status, salesProductsData -> vem no req.body
 
-    const response = await customerOrdersService.create(req.body);
+    const salesResponse = await customerOrdersService.create(req.body);
 
-    if (response.message) {
-      return res.status(StatusCode.BadRequest).json(response);
+    if (salesResponse.message) {
+      return res.status(StatusCode.BadRequest).json(salesResponse);
     }
 
-    return res.status(StatusCode.Created).json(response.id);
+    await customerOrdersService
+      .createSaleProduct(salesResponse.id, req.body.salesProductsData);
+      
+    return res.status(StatusCode.Created).json(salesResponse.id);
   },
 };
 
