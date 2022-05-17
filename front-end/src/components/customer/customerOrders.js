@@ -15,24 +15,24 @@ function CustomerOrders() {
     };
 
     fetchData();
-  }, [])
+  }, []);
 
   return (
     <div>
-      { orders.map((order) => (
-        <div>
+      { orders.map((order, index) => (
+        <div key={ index }>
           <h3
-            data-testid={`customer_orders__element-order-id-${order.id}`}
+            data-testid={ `customer_orders__element-order-id-${order.id}` }
           >
             { order.id }
           </h3>
           <h3
-            data-testid={`customer_orders__element-delivery-status-${order.id}`}
+            data-testid={ `customer_orders__element-delivery-status-${order.id}` }
           >
             { order.status }
           </h3>
           <h3
-            data-testid={`customer_orders__element-order-date-${order.id}`}
+            data-testid={ `customer_orders__element-order-date-${order.id}` }
           >
             { order.saleDate }
           </h3>
