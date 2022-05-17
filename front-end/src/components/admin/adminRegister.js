@@ -110,14 +110,14 @@ function AdminRegister() {
         disabled={ validateRegister(name, email, password) }
         onClick={ handleRegister }
       >
-        CADASTRAR
+        Cadastrar
 
       </button>
       <span
         hidden={ !error }
         data-testid="admin_manage__element-invalid-register"
       >
-        Erro ao cadastrar
+        Erro: Parâmetros inválidos para cadastro!
       </span>
     </form>
   );
