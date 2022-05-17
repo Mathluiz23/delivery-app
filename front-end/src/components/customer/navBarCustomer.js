@@ -11,22 +11,29 @@ function NavBarCustomer() {
     navigate('/login');
   };
 
+  const handleButtonOrders = () => {
+    navigate('/customer/orders');
+  };
+
   return (
     <div className="header-container">
-      <ul>
-        <li
-          className="products-header"
-          data-testid="customer_products__element-navbar-link-products"
-        >
-          Produtos
-        </li>
-        <li
+      <div>
+        <ul>
+          <li
+            className="products-header"
+            data-testid="customer_products__element-navbar-link-products"
+          >
+            Produtos
+          </li>
+        </ul>
+        <button
           className="my-requests-header"
           data-testid="customer_products__element-navbar-link-orders"
+          onClick={ handleButtonOrders }
         >
           Meus pedidos
-        </li>
-      </ul>
+        </button>
+      </div>
       <div className="client-and-button-header">
         <ul>
           <li
