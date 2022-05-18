@@ -28,7 +28,7 @@ function NavBarCustomer() {
         </ul>
         <button
           className="my-requests-header"
-          type='button'
+          type="button"
           data-testid="customer_products__element-navbar-link-orders"
           onClick={ handleButtonOrders }
         >
