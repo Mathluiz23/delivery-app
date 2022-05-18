@@ -7,10 +7,10 @@ function CustomerOrders() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3001/customer/orders');
+        const response = await axios.get('http://localhost:3001/sales');
         setOrders(response.data);
       } catch (error) {
-        console.error('Failed to fetch http://localhost:3001/customer/orders');
+        console.error('Failed to fetch http://localhost:3001/sales');
       }
     };
 
