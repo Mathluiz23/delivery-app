@@ -36,6 +36,18 @@ const usersService = {
 
     return newUser;
   },
+
+  adminCreate: async (name, email, password, role) => {
+    const userExists = await UsersModel.getUserByNameAndEmail(name, email);
+
+    if (userExists) {
+      return { message: RegisterErrors.alreadyExists };
+    }
+
+    const newUser = await UsersModel.adminCreate(name, email, password, role);
+
+    return newUser;
+  },
 };
 
 module.exports = usersService;
