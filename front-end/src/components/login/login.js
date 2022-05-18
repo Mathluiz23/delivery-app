@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import loginErrors from '../../errors/loginErrors';
@@ -26,6 +26,20 @@ function Login() {
       break;
     }
   };
+
+  useEffect(() => {
+    const getUserFromLocalStorage = () => {
+      const objLocalStorage = localStorage.getItem('user');
+
+      const user = JSON.parse(objLocalStorage);
+
+      if (user) {
+        redirectByRole(user.role);
+      }
+    };
+
+    getUserFromLocalStorage();
+  });
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();

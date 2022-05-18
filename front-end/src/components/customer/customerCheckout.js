@@ -45,9 +45,8 @@ function CustomerCheckout() {
     const array = [];
 
     const ids = Object.values(objProductsId);
-    console.log(ids);
+
     const quantities = Object.values(objProductsQuantity);
-    console.log(quantities);
 
     for (let i = 0; i < ids.length; i += 1) {
       array.push([ids[i], quantities[i]]);
