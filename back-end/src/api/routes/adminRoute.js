@@ -4,6 +4,6 @@ const tokenValidation = require('../middlewares/tokenValidation');
 
 const adminRouter = Router();
 
-adminRouter.post('/admin', tokenValidation, usersController.create);
+adminRouter.post('/users/admin', tokenValidation, usersController.adminCreate);
 
 module.exports = adminRouter;
