@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { setToken, createUser } from '../../service/request';
 
 const typeRoles = [
   { seller: 'Vendedor' },
@@ -13,6 +13,7 @@ function AdminRegister() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(false);
   const [role, setRole] = useState(Object.keys(typeRoles[2]).toString());
+  const [user, setUser] = useState('');
 
   function validateRegister(nameRegister, emailRegister, passwordRegister) {
     const regex = /^[a-z0-9._-]+@[a-z0-9]+\.[a-z]+(\.[a-z]+)?$/i;
@@ -28,35 +29,51 @@ function AdminRegister() {
     return false;
   }
 
-  const createUser = async (payload) => {
+  //   try {
+  //     const response = await axios
+  //       .post('http://localhost:3001/users/admin', payload);
+  //     console.log(response);
+
+  //     return true;
+  //   } catch (err) {
+  //     console.log(err.message);
+  //     return false;
+  //   }
+  // };
+
+  const criaUser = async (payload) => {
     console.log('aqui', payload);
+    const { token } = user;
+    const endpoint = '/users/admin';
 
-    const payloadRegister = {
-      name: payload.name,
-      email: payload.email,
-      password: payload.password,
-      role: payload.role,
-    };
+    setToken(token);
 
-    try {
-      const response = await axios
-        .post('http://localhost:3001/users/admin', payloadRegister);
-      console.log(response);
+    const createdUser = await createUser(endpoint, payload);
 
-      return true;
-    } catch (err) {
-      console.log(err.message);
-      return false;
-    }
+    return createdUser;
   };
 
   const handleRegister = async () => {
     const payload = { name, email, password, role };
 
-    const userCreated = await createUser(payload);
+    if (user.role !== 'administrator') {
+      return setError(true);
+    }
 
-    if (!userCreated) return setError(true);
+    const userCreated = await criaUser(payload);
+
+    if (!userCreated) {
+      setName('');
+      setPassword('');
+      setEmail('');
+      return setError(true);
+    }
+    window.location.reload();
   };
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('user')));
+  }, []);
 
   return (
     <form>
@@ -113,12 +130,12 @@ function AdminRegister() {
         Cadastrar
 
       </button>
-      <span
+      <p
         hidden={ !error }
         data-testid="admin_manage__element-invalid-register"
       >
         Erro: Parâmetros inválidos para cadastro!
-      </span>
+      </p>
     </form>
   );
 }
