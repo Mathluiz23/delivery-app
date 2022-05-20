@@ -18,8 +18,8 @@ export default function App() {
       <Route exact path="/customer/products" element={ <CustomerProductsPage /> } />
       <Route exact path="/customer/checkout" element={ <CustomerCheckoutPage /> } />
       <Route exact path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
-      <Route path="/admin/manage" element={ <AdminPage /> } />
       <Route exact path="/customer/orders" element={ <CustomerOrdersPage /> } />
+      <Route path="/admin/manage" element={ <AdminPage /> } />
       <Route exact path="/" element={ <Navigate to="/login" /> } />
     </Routes>
   );
