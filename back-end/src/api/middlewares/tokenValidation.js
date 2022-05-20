@@ -20,11 +20,4 @@ const tokenValidation = async (req, res, next) => {
   }
 };
 
-// const roleValidation  = async (req, res, next) => {
-//   const token = req.headers.authorization;
-
-
-//   const { data } = jwt.decode(token, secret);
-// }
-
 module.exports = tokenValidation;
