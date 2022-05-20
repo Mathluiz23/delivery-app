@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import CustomerCheckoutPage from './pages/customerCheckoutPage';
-import CustomerOrderDetails from './pages/customerOrderDetails';
+import CustomerOrderDetailsPage from './pages/customerOrderDetails';
 import CustomerOrdersPage from './pages/customerOrdersPage';
 import CustomerProductsPage from './pages/customerProductsPage';
 import LoginPage from './pages/loginPage';
@@ -16,7 +16,7 @@ export default function App() {
       <Route exact path="/seller/orders" element={ <SellerOrdersPage /> } />
       <Route exact path="/customer/products" element={ <CustomerProductsPage /> } />
       <Route exact path="/customer/checkout" element={ <CustomerCheckoutPage /> } />
-      <Route exact path="/customer/orders/:id" element={ <CustomerOrderDetails /> } />
+      <Route exact path="/customer/orders/:id" element={ <CustomerOrderDetailsPage /> } />
       <Route exact path="/customer/orders" element={ <CustomerOrdersPage /> } />
       <Route exact path="/" element={ <Navigate to="/login" /> } />
     </Routes>
