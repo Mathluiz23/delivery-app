@@ -1,15 +1,15 @@
 import React from 'react';
+import CustomerOrderDetails from '../components/customer/customerOrderDetails';
 import NavBarCustomer from '../components/customer/navBarCustomer';
 
-function CustomerOrderDetails() {
+function CustomerOrderDetailsPage() {
   return (
     <>
       <NavBarCustomer />
-      <div>
-        <h1>Detalhes dos Pedidos</h1>
-      </div>
+      <h1>Detalhes dos Pedidos</h1>
+      <CustomerOrderDetails />
     </>
   );
 }
 
-export default CustomerOrderDetails;
+export default CustomerOrderDetailsPage;
