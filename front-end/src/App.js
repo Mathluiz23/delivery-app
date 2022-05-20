@@ -2,7 +2,7 @@ import React from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AdminPage from './pages/adminPage';
 import CustomerCheckoutPage from './pages/customerCheckoutPage';
-import CustomerOrderDetails from './pages/customerOrderDetails';
+import CustomerOrderDetailsPage from './pages/customerOrderDetails';
 import CustomerOrdersPage from './pages/customerOrdersPage';
 import CustomerProductsPage from './pages/customerProductsPage';
 import LoginPage from './pages/loginPage';
