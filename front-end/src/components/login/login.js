@@ -20,7 +20,7 @@ function Login() {
       navigate(`/${role}/orders`);
       break;
     case 'administrator':
-      navigate(`/${role}/manage`);
+      navigate('/admin/manage');
       break;
     default:
       break;

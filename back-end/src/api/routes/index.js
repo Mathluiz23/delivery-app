@@ -1,4 +1,5 @@
 const { Router } = require('express');
+const adminRouter = require('./adminRoute');
 const customerProductsRouter = require('./customerProductsRoute');
 const loginRouter = require('./loginRoute');
 const orderDetails = require('./orderDetails');
@@ -14,6 +15,7 @@ router.use(registerRouter);
 router.use(customerProductsRouter);
 router.use(orderDetails);
 router.use(sellersRouter);
+router.use(adminRouter);
 router.use(salesRouter);
 
 module.exports = router;

@@ -38,6 +38,19 @@ const usersController = {
 
     return res.status(StatusCode.Created).json();
   },
+
+  adminCreate: async (req, res) => {
+    const { name, email, role } = req.body;
+    const password = encryptPassword(req.body.password);
+
+    const response = await UsersService.adminCreate(name, email, password, role);
+
+    if (response.message) {
+      return res.status(StatusCode.Conflict).json(response);
+    }
+
+    return res.status(StatusCode.Created).json();
+  },
 };
 
 module.exports = usersController;

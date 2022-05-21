@@ -40,6 +40,12 @@ const usersModel = {
 
     return newUser;
   },
+
+  adminCreate: async (name, email, password, role) => {
+    const newUser = await user.create({ name, email, password, role });
+
+    return newUser;
+  },
 };
 
 module.exports = usersModel;
