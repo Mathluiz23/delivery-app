@@ -7,3 +7,9 @@ expect.extend({
   toResetDB,
   toReturnDataWith
 });
+
+// module.exports = {
+//   toValidateConnection,
+//   toResetDB,
+//   toReturnDataWith
+// };
