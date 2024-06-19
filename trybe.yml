@@ -14,3 +14,4 @@ ignore_files:
   - jest.config.js
   - pm2.dev.config.yml
   - pm2.test.config.yml
+  # - trybe.yml

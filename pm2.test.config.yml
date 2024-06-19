@@ -17,3 +17,4 @@ apps:
   max_memory_restart: 200M
   env:
     PORT: 3000
+  # watch: true # Uncomment this line to enable watch mode
