@@ -11,6 +11,5 @@ module.exports = {
   ],
   testRegex: "./*\\.test\\.js$",
   testTimeout: 180000,
-  // verbose: true,
 };
 
