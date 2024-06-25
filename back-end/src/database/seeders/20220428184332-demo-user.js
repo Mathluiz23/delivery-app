@@ -19,7 +19,14 @@ module.exports = {
       password: '1c37466c159755ce1fa181bd247cb925',
       email: 'zebirita@email.com',
       role: 'customer'
-    }
+    },
+    {
+      name: 'Cliente Maria Joana',
+      password: 'e10adc3949ba59abbe56e057f20f883e',
+      email: 'maria@email.com',
+      role: 'customer'
+
+    },
   ]);
   },
 
