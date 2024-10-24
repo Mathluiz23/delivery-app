@@ -16,7 +16,7 @@ module.exports = {
     },
     {
       name: 'Cliente Zé Birita',
-      password: '1c37466c159755ce1fa181bd247cb925',
+      password: 'b646cc7fd0ffdc786b7c0ba5b101215f',
       email: 'zebirita@email.com',
       role: 'customer'
     },
