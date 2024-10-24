@@ -1,19 +1,28 @@
+.container-page {
+  margin: 0;
+  top: 0;
+  padding-top: 120px; /* Adicione o padding com a altura do header */
+  /* background-color: rgb(245, 245, 245); */
+}
+
+.header-container {
+  background-color: black;
+  display: flex;
+  height: 65px;
+  justify-content: space-between;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  box-shadow: 1px 1px 5px 1px black;
+}
+
 .page-products-container {
   display: flex;
   flex-wrap: wrap;
   margin: auto;
   margin-bottom: 30px;
-  margin-top: 30px;
-  width: 80%;
-}
-
-.header-container {
-  background-color: #ffd803;
-  box-shadow: 2px 5px 8px black;
-  display: flex;
-  height: 100px;
-  justify-content: space-between;
-  width: 100%;
+  width: 90%;
+  gap: 10px;
 }
 
 .header-container ul {
@@ -22,22 +31,43 @@
   flex-direction: row;
 }
 
+.button-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: solid  5px red; */
+}
+
+.my-requests-header {
+  align-items: center;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  height: 30px;
+  justify-content: space-around;
+  margin: 15px;
+  width: 120px;
+  padding: 10px;
+}
+
 .header-container li {
   align-items: center;
   border-radius: 5px;
   display: flex;
   flex-direction: row;
-  font-size: 18px;
-  height: 50px;
+  font-size: 13px;
+  height: 30px;
   justify-content: space-around;
-  margin: 10px;
-  width: 150px;
+  margin: 15px;
+  width: 115px;
+  padding: 10px;
+  background-color: #ffd803;
 }
 
 .header-container li:hover {
-  background-color: rgb(248, 162, 5);
+  border: solid 1px white;
 }
-
 
 .client-and-button-header {
   align-items: center;
@@ -45,16 +75,17 @@
   justify-content: space-between;
   margin-right: 0;
   width: 30%;
+  /* border: solid  5px blue; */
 }
 
 .button-go-out {
   align-items: center;
-  background-color: rgb(248, 162, 5);
+  background-color:  #ffd803;
   display: flex;
-  font-size: 18px;
+  font-size: 15px;
   height: 100%;
   justify-content: center;
-  width: 100px;
+  width: 70px;
 }
 
 .card-produtcs {
@@ -63,32 +94,33 @@
   box-shadow: 2px 2px 5px black;
   display: flex;
   flex-direction: column;
-  height: 350px;
+  height: 300px;
   margin: auto;
   margin-top: 15px;
-  width: 280px;
+  width: 250px;
+  gap: 10px;
 }
 
-.card-produtcs:hover {
-  box-shadow: 5px 6px 5px rgb(255, 255, 44);
-  transform: scale(1.05);
-  transition: 1.3s;
-}
+/* .card-produtcs:hover {
+  transform: scale(1.02);
+  transition: 1s;
+} */
 
 .card-produtcs img {
   border-radius: 8px;
-  height: 180px;
+  height: 120px;
   margin: auto;
-  width: 180px;
+  width: 100px;
 }
 
 .button-ver-carrinho {
   display: flex;
-  height: 50px;
-  justify-content: end;
-  margin-top: auto;
-  min-width: 200px;
-  width: 30%;
+  height: 60px;
+  min-width: 180px;
+  width: 180px;
+  justify-content: center;
+  position: absolute; /* Ou fixed, se você quiser fixá-lo na tela */
+  right: 100px;
 }
 
 
@@ -96,9 +128,10 @@
   background-color: rgb(26, 112, 26);
   border-radius: 5px;
   color: white;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 700;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 .card-produtcs h2 {
@@ -117,6 +150,7 @@
   display: flex;
   justify-content: center;
   margin: 5px;
+  font-size: 15px;
 }
 
 .quantity-produtc {
@@ -129,32 +163,32 @@
   border-bottom: solid 1.5px black;
   border-top: solid 1.5px black;
   display: flex;
-  height: 50px;
+  height: 40px;
   justify-content: center;
   text-align: center;
-  width: 80px;
+  width: 40px;
 }
 
 .button-add {
-  align-items: center;
+  /* align-items: center; */
   background-color: rgb(26, 112, 26);
   border-radius: 0 10px 10px 0;
   color: white;
   display: flex;
-  font-size: 35px;
-  height: 50px;
+  font-size: 30px;
+  height: 40px;
   justify-content: center;
-  width: 50px;
+  width: 40px;
 }
 
 .button-substr {
-  align-items: center;
+  /* align-items: center; */
   background-color: rgb(26, 112, 26);
   border-radius: 10px 0 0 10px;
   color: white;
   display: flex;
-  font-size: 35px;
-  height: 50px;
+  font-size: 30px;
+  height: 40px;
   justify-content: center;
-  width: 50px;
+  width: 40px;
 }
