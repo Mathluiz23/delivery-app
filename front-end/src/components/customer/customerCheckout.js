@@ -58,8 +58,12 @@ function CustomerCheckout() {
   const { token } = JSON.parse(localStorage.getItem('user'));
 
   const orderCheckout = async () => {
+    if (!deliveryAddress || !deliveryNumber) {
+      alert('Por favor, preencha o endereço e o número.');
+      return;
+    }
+    
     const salesProductsData = getIdAndQuantity(productsId, productsQuantity);
-
     const payload = {
       userName: JSON.parse(localStorage.getItem('user')).name,
       sellerName: FIRST_SELLER,
@@ -70,15 +74,14 @@ function CustomerCheckout() {
       status: 'Pendente',
       salesProductsData,
     };
-
+  
     const response = await axios.post(
       'http://localhost:3001/customer/orders',
       payload,
       { headers: { authorization: token } },
     );
-
+  
     const id = response.data;
-
     navigate(`/customer/orders/${id}`);
   };
 
