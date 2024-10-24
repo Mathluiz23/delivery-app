@@ -92,17 +92,17 @@ function CustomerProducts() {
       );
       break;
 
-    case 'button-price-less':
-      setProductsQuantity({
-        ...productsQuantity,
-        [name]: (productsQuantity[name] ? productsQuantity[name] -= 1 : 0),
-      });
-      setCartProducts(
-        {
-          ...cartProducts,
-          [name]: (Number(inputValue) * Number(product.price)) - Number(product.price),
-        },
-      );
+      case 'button-price-less':
+        if (productsQuantity[name] && productsQuantity[name] > 0) {
+          setProductsQuantity({
+            ...productsQuantity,
+            [name]: productsQuantity[name] -= 1,
+          });
+          setCartProducts({
+            ...cartProducts,
+            [name]: (Number(inputValue) * Number(product.price)) - Number(product.price),
+          });
+        }
       break;
     default:
       break;
@@ -110,7 +110,7 @@ function CustomerProducts() {
   };
 
   return (
-    <div>
+    <div className='container-page'>
       <NavBarCustomer />
       <div className="page-products-container">
         { products.map((product) => (
@@ -166,7 +166,8 @@ function CustomerProducts() {
             </div>
           </div>
         )) }
-        <div className="button-ver-carrinho ">
+      </div>
+      <div className="button-ver-carrinho ">
           <button
             type="button"
             onClick={ moveToCheckout }
@@ -181,7 +182,6 @@ function CustomerProducts() {
             </strong>
           </button>
         </div>
-      </div>
     </div>
   );
 }
