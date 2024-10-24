@@ -17,11 +17,12 @@ function NavBarCustomer() {
 
   return (
     <div className="header-container">
-      <div>
+      <div className="button-header">
         <ul>
           <li
             className="products-header"
             data-testid="customer_products__element-navbar-link-products"
+            onClick={() => {navigate('/customer/products')}}
           >
             Produtos
           </li>
