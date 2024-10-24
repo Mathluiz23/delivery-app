@@ -4,7 +4,7 @@ const fs = require('fs');
 const auth = (email) => {
   const secret = fs.readFileSync('jwt.evaluation.key', 'utf-8');
   const jwtConfig = {
-    expiresIn: '7d',
+    expiresIn: '65d',
     algorithm: 'HS256',
   };
   const token = jwt.sign({ data: email }, secret, jwtConfig);
