@@ -62,7 +62,10 @@ function CustomerOrderDetails() {
       <button
         type="button"
         data-testid="customer_order_details__button-delivery-check"
-        disabled
+        disabled={order.status !== 'Pendente'}
+        onClick={ () => {
+          // lógica para marcar como entregue
+        }}
       >
         Marcar como Entregue
       </button>
