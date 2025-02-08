@@ -89,5 +89,3 @@ Este projeto consiste em um aplicativo web completo para gerenciar um delivery d
 ## Contribuição
 
 Contribuições são bem-vindas! Sinta-se à vontade para abrir issues e pull requests para discutir melhorias ou novas funcionalidades.
-
-## Entre em contato! :)
